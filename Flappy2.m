@@ -13,6 +13,8 @@ tau = h/c;             % Stability limit
 clf
 ylim([0, 8]); xlim([1,2]);
 title('Floaty Shape', 'Color', 'black', 'FontSize', 25, 'FontName','Goudy Stout')
+img = imread('city.png');
+imagesc([1 2], [0 8], img);
 axis off
 text(1.1, 4, '"W" to Float and "S" to Dive', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
 text(1.1, 3, 'Good Luck!', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
@@ -121,6 +123,9 @@ end
     end
     
     figure(1)
+    imagesc([2 1], [8 0], img);
+    set(gca,'Ydir','Normal')
+    hold on;
     plot(x,a,'-', 'LineWidth', 5); ylim([ylowlimit, yuplimit]); xlim([1,2])
     hold on  
     plot(x,b,'-', 'LineWidth', 5); 
