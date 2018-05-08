@@ -142,7 +142,7 @@ end
      r3 = round(rand * 50);      % Idea to collect coins for more points
      if r3 == 1 && c1x < 1
          c1x = 2.1;
-         c1y = max(a(round(2.1*700*h + 320):round(2.1*700*h +370))) + 2;
+         c1y = rand()*abs((a(round(2.1/h + 700/2 +3))+.1 - (b(round(2.1/h + 700/2 + 3))-.15))) + (a(round(2.1)));
      end
      c1x = c1x - h;
      plot(c1x, c1y, 'o', 'MarkerSize', 10,'MarkerFaceColor',[1,.87,.27] );   
