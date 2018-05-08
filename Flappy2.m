@@ -11,13 +11,13 @@ h = L/N;                % Space grid size
 x = -L/2+h/2+(0:N-1)*h; % Space coordinate
 tau = h/c;             % Stability limit
 clf
-ylim([0, 8]); xlim([1,2])
+ylim([0, 8]); xlim([1,2]);
 title('Floaty Shape', 'Color', 'black', 'FontSize', 25, 'FontName','Goudy Stout')
 axis off
 text(1.1, 4, '"W" to Float and "S" to Dive', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
 text(1.1, 3, 'Good Luck!', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
 text(1.1, 2, 'Press any button to continue...', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
-lives=1
+lives=1;
 xofy = 1.2/h;
 b = zeros(N+1,1);
 b = b+4;
@@ -33,10 +33,10 @@ bottom = 5;
 top = 5;
 space = 50;
 level = 0;
-c1x=0
-c2x=0
-c1y=0
-c2y=0
+c1x=0;
+c2x=0;
+c1y=0;
+c2y=0;
 % coins = zeros(20, 2);
 % coinsubtract = [-h, 0; -h, 0; -h, 0; -h, 0; -h, 0; -h, 0; -h, 0; -h, 0; -h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0;-h, 0] 
 ylowlimit = 0;
@@ -50,7 +50,7 @@ b= - 2./cosh(5*x.^2/h).^2 +7; % initial top pulse
 %% Run the loop
 pause;
 clf
-%plot(x,a,'-o'); ylim([-1,1.5]);
+plot(x,a,'-o'); ylim([-1,1.5]);
 
 
 coeff_ftcs = -c*tau/(2.*h);
@@ -58,11 +58,12 @@ istep = 1;
 t=0;
 v = 0;
 accel = -100;
-America = 0
+America = 0;
 set(gcf,'CurrentCharacter','@'); % set to a dummy character for flapping
 while lives > 0
     lives = lives -1;
-    y= (b(700*h*1.2 +350) + a(700*h*1.2 +350))/2
+%     y= (b(700*h*1.2 +350) + a(700*h*1.2 +350))/2;
+    y = (a(round(1.2/h + 700/2 +3))+.1 + (b(round(1.2/h + 700/2 + 3))-.15))/2;
     v = 0;
 while((y > a(round(1.2/h + 700/2 +3))+.1) && (y < (b(round(1.2/h + 700/2 + 3))-.15))) | (y > (b(round(1.2/h + 700/2 + 3))+.4)) | (y < (a(round(1.2/h + 700/2 + 3))-.3)); 
 
@@ -74,7 +75,7 @@ end
 
 if rem(istep +9999, 10000) ==0    
      [u, Fs] = audioread('SuperMarioBros.mp3');
-     player = audioplayer(u, Fs)
+     player = audioplayer(u, Fs);
      play(player);   
 end
 
@@ -89,11 +90,11 @@ end
     elseif k =='o' % Easter Egg
          b(500:600) = 0;
     elseif k=='m'
-     stop(player)
+     stop(player);
      [l, Fl] = audioread('Amerika.mp3');
-     player = audioplayer(l, Fl)
+     player = audioplayer(l, Fl);
      play(player);
-     America = 1
+     America = 1;
     elseif k=='l'
         a(500:600) = 7;
     end
@@ -124,11 +125,11 @@ end
     hold on  
     plot(x,b,'-', 'LineWidth', 5); 
     score='SCORE ';
-    text(1.5, 7.5, [score, num2str(istep), '  LEVEL ', num2str(level)], 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
-    text(1, 7.5, ['Coins ', num2str(CoinCounter)], 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
-    text(1.2, 7.5, ['Lives ', num2str(lives)], 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
-    plot(1.2, y ,shape,'MarkerFaceColor',color, 'MarkerEdgeColor', color, 'MarkerSize', 20)
-    title('Floaty Shape', 'Color', 'black', 'FontSize', 25, 'FontName','Goudy Stout')
+    text(1.5, 7.5, [score, num2str(istep), '  LEVEL ', num2str(level)], 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' );
+    text(1, 7.5, ['Coins ', num2str(CoinCounter)], 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' );
+    text(1.2, 7.5, ['Lives ', num2str(lives)], 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' );
+    plot(1.2, y ,shape,'MarkerFaceColor',color, 'MarkerEdgeColor', color, 'MarkerSize', 20);
+    title('Floaty Shape', 'Color', 'black', 'FontSize', 25, 'FontName','Goudy Stout');
     axis off
     
     
@@ -139,14 +140,14 @@ end
          c1y = max(a(round(2.1*700*h + 320):round(2.1*700*h +370))) + 2;
      end
      c1x = c1x - h;
-     plot(c1x, c1y, 'o', 'MarkerSize', 10,'MarkerFaceColor',[1,.87,.27] )   
+     plot(c1x, c1y, 'o', 'MarkerSize', 10,'MarkerFaceColor',[1,.87,.27] );   
      if c1x < 1.25 & c1x > 1.15 & abs(c1y - y) < .3
          CoinCounter = CoinCounter +1;
          c1x = 0;
      end
     if CoinCounter == 5
-        CoinCounter = CoinCounter -5
-        lives = lives +1
+        CoinCounter = CoinCounter -5;
+        lives = lives +1;
     end
     hold off
     pause(.01);
@@ -197,7 +198,7 @@ end
         
     end   
   if America == 1 %Shape is a star when Amerika plays
-      shape = 'p'
+      shape = 'p';
   end
     
     
@@ -233,7 +234,7 @@ end
             color = 'y';
              end
         elseif rem(colorshift, 7) ==6 && America == 1
-            color = 'white'
+            color = 'white';
             
         end
     end
@@ -262,7 +263,7 @@ end
 end
 stop(player);
      [q, Fq] = audioread('SadTrombone.mp3');
-     Trombone = audioplayer(q, Fq)
+     Trombone = audioplayer(q, Fq);
      play(Trombone); 
 text(1.2, 4, '\bf GAME OVER', 'Color', 'black', 'FontSize', 35);
 text(1.4, 2.7, '\bf LOSER', 'Color', 'black', 'FontSize', 35, 'FontName', 'Arial Black', 'FontWeight', 'bold', 'Rotation', 20);
