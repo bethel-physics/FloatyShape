@@ -149,10 +149,17 @@ end
      if c1x < 1.25 & c1x > 1.15 & abs(c1y - y) < .3
          CoinCounter = CoinCounter +1;
          c1x = 0;
+         [p, Fp] = audioread('coin_sound.mp3');
+         coinsound = audioplayer(p, Fp);
+         play(coinsound); 
      end
     if CoinCounter == 5
         CoinCounter = CoinCounter -5;
         lives = lives +1;
+
+        [m, Fm] = audioread('mushroom_effect.mp3');
+        mushroom = audioplayer(m, Fm);
+        play(mushroom); 
     end
     hold off
     pause(.01);
@@ -261,6 +268,10 @@ if lives > 0
 text(1.0, 4, '\bf We''re dead!  We''re dead!', 'Color', 'black', 'FontSize', 20);
 text(1.0, 3.5, '\bf We survived! But we''re dead!', 'Color', 'black', 'FontSize', 20);
 text(1.0, 2, '\bf Press any key to continue.', 'Color', 'black', 'FontSize', 20);
+pause(player); 
+[d, Fd] = audioread('Dash1.m4a');
+Dash = audioplayer(d, Fd);
+play(Dash);
 pause
 end
 
