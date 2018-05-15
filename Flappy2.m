@@ -13,7 +13,6 @@ tau = h/c;             % Stability limit
 clf
 %inserting image as background of initial screen
 ylim([0, 8]); xlim([1,2]);  
-title('Floaty Shape', 'Color', 'black', 'FontSize', 25, 'FontName','Goudy Stout')
 img = imread('city.png');
 imagesc([1 2], [0 8], img);
 axis off
@@ -21,6 +20,7 @@ axis off
 ylowlimit = 0;
 yuplimit = 8;
 %game start message
+title('Floaty Shape', 'Color', 'black', 'FontSize', 25, 'FontName','Goudy Stout')
 text(1.1, 4, '"W" to Float and "S" to Dive', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
 text(1.1, 3, 'Good Luck!', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
 text(1.1, 2, 'Press any button to continue...', 'Color', 'blue', 'FontSize', 20, 'FontName','HoboSTD' )
@@ -45,6 +45,8 @@ space = 100;
 %initializing positions to be used for coins
 c1x=0;
 c1y=0;
+c1x2=0;
+c1y2=0;
 coinnumber = 0;
 CoinCounter = 0;
 % Define initial pulse
@@ -55,6 +57,7 @@ b= - 2./cosh(5*x.^2/h).^2 +7; % initial top pulse
 pause;
 clf
 plot(x,a,'-o'); ylim([-1,1.5]);
+
 
 
 coeff_ftcs = -c*tau/(2.*h);
@@ -80,7 +83,7 @@ while lives > 0
             y = 20;
         end
         
-        if rem(istep +9999, 10000) ==0 %loops the audio player so music continues
+        if rem(istep +3599, 3600) ==0 %loops the audio player so music continues
             [u, Fs] = audioread('SuperMarioBros.mp3');
             player = audioplayer(u, Fs);
             play(player);
@@ -150,6 +153,7 @@ while lives > 0
         
         
         r3 = round(rand * 50);      % Idea to collect coins for more points
+        r4 = round(rand * 150);
         %choosing where to place coins
         if r3 == 1 && c1x < 1
             c1x = 2.1;
@@ -157,8 +161,14 @@ while lives > 0
             %somewhere between the top and bottom boundaries
             c1y =rand()*abs((a(round(2.1/h + 700/2 +3))+.15 - (b(round(2.1/h + 700/2 + 3))-.15))) + (a(round(2.1/h+350)));
         end
+        if r4 == 1 && c1x2 < 1
+            c1x2 = 2.5;
+            c1y2 =15+rand()*10;
+        end
         c1x = c1x - h;
+        c1x2 = c1x2 - h;
         plot(c1x, c1y, 'o', 'MarkerSize', 10,'MarkerFaceColor',[1,.87,.27] );
+        plot(c1x2, c1y2, 'o', 'MarkerSize', 30,'MarkerFaceColor',[1,.87,.27] );
         %calculating if the shape and the coin are at the same spot
         if c1x < 1.25 & c1x > 1.15 & abs(c1y - y) < .3
             CoinCounter = CoinCounter +1;
@@ -168,7 +178,15 @@ while lives > 0
             coinsound = audioplayer(p, Fp);
             play(coinsound); 
         end
-        if CoinCounter == 5 %adds a life if you have collected 5 coins
+        if c1x2 < 1.25 & c1x2 > 1.15 & abs(c1y2 - y) < .3
+            CoinCounter = CoinCounter +5;
+            c1x2 = 0;
+            %sound effect
+            [p, Fp] = audioread('coin_sound.mp3'); 
+            coinsound = audioplayer(p, Fp);
+            play(coinsound); 
+        end        
+        if CoinCounter > 4 %adds a life if you have collected 5 coins
             CoinCounter = CoinCounter -5;
             lives = lives +1;
             %sound effect
