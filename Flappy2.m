@@ -41,7 +41,7 @@ shape = 's';
 %initializing counters for creating pulses at bottom and top
 bottom = 5;
 top = 5;
-space = 50;
+space = 100;
 %initializing positions to be used for coins
 c1x=0;
 c1y=0;
@@ -143,7 +143,7 @@ while lives > 0
             level = level + 1;
             text(1.3, 4, 'LEVEL UP!', 'Color', 'black', 'FontSize', 35);
             if level < 10
-                space = space - 3;
+                space = space - 5;
             end
         end
         
@@ -155,7 +155,7 @@ while lives > 0
             c1x = 2.1;
             %initializing the height of the coin to a random spot
             %somewhere between the top and bottom boundaries
-            c1y =rand()*abs((a(round(2.1/h + 700/2 +3))+.1 - (b(round(2.1/h + 700/2 + 3))-.15))) + (a(round(2.1)));
+            c1y =rand()*abs((a(round(2.1/h + 700/2 +3))+.15 - (b(round(2.1/h + 700/2 + 3))-.15))) + (a(round(2.1/h+350)));
         end
         c1x = c1x - h;
         plot(c1x, c1y, 'o', 'MarkerSize', 10,'MarkerFaceColor',[1,.87,.27] );
@@ -192,12 +192,12 @@ while lives > 0
         top = top +1;
         if r1 + r2 > 6 %don't add bump if r1 + r2 > 6
             continue
-        else    %possiblity for a bottom bump if not to close to a top bump
+        else    %possiblity for a top bump if not too close to a top bump
             if round(r1*5) == 1 & bottom > 10 & top > 10 & (6-r1) + top > space
                 b= b +(-(r2)*(1./cosh(5*x.^2/h).^2));
                 top = 0;
             end
-            %possiblity for a top bump if not to close to a bottom bump
+            %possiblity for a bottom bump if not too close to a bottom bump
             if  round(r2*5)== 1 & top > 10 & bottom > 10 & (6-r2)+ bottom > space
                 a= a + (r1)*1./cosh(5*x.^2/h).^2;
                 bottom = 0;
