@@ -155,7 +155,7 @@ while lives > 0
             c1x = 2.1;
             %initializing the height of the coin to a random spot
             %somewhere between the top and bottom boundaries
-            c1y = rand()*abs((a(round(2.1/h + 700/2 +3))+.1 - (b(round(2.1/h + 700/2 + 3))-.15))) + (a(round(2.1)));
+            c1y =rand()*abs((a(round(2.1/h + 700/2 +3))+.1 - (b(round(2.1/h + 700/2 + 3))-.15))) + (a(round(2.1)));
         end
         c1x = c1x - h;
         plot(c1x, c1y, 'o', 'MarkerSize', 10,'MarkerFaceColor',[1,.87,.27] );
@@ -195,12 +195,12 @@ while lives > 0
         else    %possiblity for a bottom bump if not to close to a top bump
             if round(r1*5) == 1 & bottom > 10 & top > 10 & (6-r1) + top > space
                 b= b +(-(r2)*(1./cosh(5*x.^2/h).^2));
-                bottom = 0;
+                top = 0;
             end
             %possiblity for a top bump if not to close to a bottom bump
             if  round(r2*5)== 1 & top > 10 & bottom > 10 & (6-r2)+ bottom > space
                 a= a + (r1)*1./cosh(5*x.^2/h).^2;
-                top = 0;
+                bottom = 0;
             end
         end
         
@@ -279,9 +279,9 @@ while lives > 0
     end
 
 if lives > 0    %messages for when you die but still have lives remaining
-    text(1.0, 4, '\bf We''re dead!  We''re dead!', 'Color', 'black', 'FontSize', 20);
-    text(1.0, 3.5, '\bf We survived! But we''re dead!', 'Color', 'black', 'FontSize', 20);
-    text(1.0, 2, '\bf Press any key to continue.', 'Color', 'black', 'FontSize', 20);
+    text(1.2, 4, '\bf We''re dead!  We''re dead!', 'Color', 'black', 'FontSize', 20);
+    text(1.2, 3.5, '\bf We survived! But we''re dead!', 'Color', 'black', 'FontSize', 20);
+    text(1.2, 2, '\bf Press any key to continue.', 'Color', 'black', 'FontSize', 20);
     pause
 end
 
