@@ -7,6 +7,6 @@ Play floaty shape!
  * Download the zip file using the big green "Download" button
  * Unzip it somewhere
  * Open MATLAB and go to the upzipped folder
- * Type <tt>FloatyShape<\tt> in the command window and float!
+ * Type <tt>FloatyShape</tt> in the command window, hit enter, and float!
 
 For best results, move the play window so that it doesn't overlap with the MATLAB window.
