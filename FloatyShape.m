@@ -83,11 +83,11 @@ while lives > 0
             y = 20;
         end
         
-        if rem(istep +3599, 3600) ==0 %loops the audio player so music continues
-            [u, Fs] = audioread('SuperMarioBros.mp3');
-            player = audioplayer(u, Fs);
-            play(player);
-        end
+        %if rem(istep +3599, 3600) ==0 %loops the audio player so music continues
+        %    [u, Fs] = audioread('SuperMarioBros.mp3');
+        %    player = audioplayer(u, Fs);
+        %    play(player);
+        %end
         
         k=get(gcf,'CurrentCharacter');    %% Flap! check for key to change velocity
         if k~='@' % has it changed from the dummy character?
@@ -100,10 +100,10 @@ while lives > 0
             elseif k =='o' % Easter Egg
                 b(500:600) = 0; %opens up the top barrier by setting it to 0
             elseif k=='m'   %Easter Egg
-                stop(player);   %stops current player, plays amerika music
-                [l, Fl] = audioread('Amerika.mp3');
-                player = audioplayer(l, Fl);
-                play(player);
+                %stop(player);   %stops current player, plays amerika music
+                %[l, Fl] = audioread('Amerika.mp3');
+                %player = audioplayer(l, Fl);
+                %play(player);
                 America = 1;
             elseif k=='l'   %Easter Egg
                 a(500:600) = 7; %opens up the bottom barrier by setting it to the top
@@ -305,7 +305,7 @@ end
 
 
 end
-stop(player);   %stops audio player
+%stop(player);   %stops audio player
         %play losing music
      [q, Fq] = audioread('SadTrombone.mp3');
      Trombone = audioplayer(q, Fq);
